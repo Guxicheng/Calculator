@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #calculator {
+            margin: 15px auto;
+            width: 330px;
+            height: 400px;
+            background: grey;
+            padding: 15px;
+            border-radius: 15px;
+        }
+        
+        .outputPanel {
+            margin-top: 5px;
+            width: 300px;
+            height: 40px;
+            text-align: right;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+        
+        #inputPanel {
+            height: 253px;
+            margin-top: 25px;
+            padding: 8px;
+        }
+        
+        #inputPanel .last {
+            margin-right: 0px;
+        }
+        
+        #inputPanel .btnNum {
+            float: left;
+            width: 54px;
+            height: 36px;
+            text-align: center;
+            background: #ccc;
+            margin: 0 20px 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <div class="outputPanel">
+            <input type="text" id="panelNum" name="panelNum" class="outputPanel">
+        </div>
+        <div id="inputPanel">
+
+            <input type="button" title="清除" id="C" onclick="resetNum()" value="C" class="btnNum">
+            <input type="button" title="取反" id="reverse" onclick="calNum(this.id)" value="+/-" class="btnNum">
+            <input type="button" title="百分比" id="%" onclick="calNum(this.id)" value="%" class="btnNum">
+            <input type="button" title="除" id="/" onclick="calNum(this.id)" value="/" class="btnNum" style="margin-right:0px">
+
+            <input type="button" id="7" onclick="calNum(this.id)" value="7" class="btnNum">
+            <input type="button" id="8" onclick="calNum(this.id)" value="8" class="btnNum">
+            <input type="button" id="9" onclick="calNum(this.id)" value="9" class="btnNum">
+            <input type="button" title="乘" id="*" onclick="calNum(this.id)" value="*" class="btnNum" style="margin-right:0px">
+
+            <input type="button" id="4" onclick="calNum(this.id)" value="4" class="btnNum">
+            <input type="button" id="5" onclick="calNum(this.id)" value="5" class="btnNum">
+            <input type="button" id="6" onclick="calNum(this.id)" value="6" class="btnNum">
+            <input type="button" title="减" id="-" onclick="calNum(this.id)" value="-" class="btnNum" style="margin-right:0px">
+
+            <input type="button" id="1" onclick="calNum(this.id)" value="1" class="btnNum">
+            <input type="button" id="2" onclick="calNum(this.id)" value="2" class="btnNum">
+            <input type="button" id="3" onclick="calNum(this.id)" value="3" class="btnNum">
+            <input type="button" title="加" id="+" onclick="calNum(this.id)" value="+" class="btnNum" style="margin-right:0px">
+
+            <input type="button" id="0" onclick="calNum(this.id)" value="0" class="btnNum">
+            <input type="button" id="." onclick="calNum(this.id)" value="." class="btnNum">
+            <input type="button" title="退格" id="Back" onclick="backNum()" value="🔙" class="btnNum">
+            <input type="button" title="等于" id="equal" onclick="equal()" value="=" class="btnNum" style="margin-right:0px">
+        </div>
+    </div>
+    <script>
+        var panelNum = document.getElementById('panelNum');
+
+        function calNum(num) {
+            if (num == "reverse") {
+                panelNum.value = -panelNum.value
+            } else if (num == "%") {
+                panelNum.value = Math.round(panelNum.value) / 100;
+            } else {
+                panelNum.value += document.getElementById(num).value;
+            }
+        }
+        // 计算
+        function equal() {
+            if (panelNum.value) {
+                panelNum.value = eval(panelNum.value);
+            }
+
+        }
+        // 重置    
+        function resetNum() {
+            panelNum.value = null;
+            panelNum.focus();
+        }
+        //退格
+        function backNum() {
+            var arr = panelNum;
+            arr.value = arr.value.substring(0, arr.value.length - 1);
+        }
+    </script>
+</body>
+
+</html>
